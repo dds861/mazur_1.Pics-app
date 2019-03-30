@@ -1,6 +1,26 @@
 <resources>
-    <string name="app_name">Mazur App</string>
+    <string name="app_name">Landscape pics: Garden</string>
 
-    <string name="facebook_app_id" translatable="false">410078536422719</string>
-    <string name="fb_login_protocol_scheme" translatable="false">fb410078536422719</string>
+    <string name="title_activity_main2"></string>
+
+
+    <string name="facebook_app_id" translatable="false">2142425552473901</string>
+    <string name="fb_login_protocol_scheme" translatable="false">fb2142425552473901</string>
+
+    <!--//test banner id-->
+    <string name="admob_banner_ad_unit_id">ca-app-pub-3940256099942544/6300978111</string>
+
+
+    <!--//test Interstitial id-->
+    <string name="admob_interstitial_tilda_ad_unit_id">ca-app-pub-3940256099942544~3347511713</string>
+    <string name="admob_interstitial_ad_unit_id">ca-app-pub-3940256099942544/1033173712</string>
+
+
+
+
+    <!--//test Interstitial id-->
+    <string name="yandex_api_key"></string>
+
+
+
 </resources>

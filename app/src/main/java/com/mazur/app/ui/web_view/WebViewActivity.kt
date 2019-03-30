@@ -3,16 +3,16 @@ package com.mazur.app.ui.web_view
 import android.annotation.SuppressLint
 import android.content.Intent
 import android.graphics.Bitmap
+import android.util.Log
 import android.view.View
-import android.webkit.WebChromeClient
-import android.webkit.WebView
-import android.webkit.WebViewClient
+import android.webkit.*
 import android.widget.ProgressBar
 import com.mazur.app.EXTRA_TASK_URL
 import com.mazur.app.R
 import com.mazur.app._core.BaseActivity
 import im.delight.android.webview.AdvancedWebView
 import kotlinx.android.synthetic.main.activity_web_view.*
+import kotlinx.android.synthetic.main.content_progress_bar.*
 
 
 /**
@@ -22,6 +22,7 @@ class WebViewActivity : BaseActivity(), AdvancedWebView.Listener {
 
     private lateinit var webView: AdvancedWebView
     private lateinit var progressBar: ProgressBar
+    private lateinit var webSettings: WebSettings
 
     override fun getContentView(): Int = R.layout.activity_web_view
 
@@ -37,6 +38,15 @@ class WebViewActivity : BaseActivity(), AdvancedWebView.Listener {
         configureWebView()
 
         webView.loadUrl(intent.getStringExtra(EXTRA_TASK_URL))
+
+
+//        webSettings = webView.settings
+//        webSettings.javaScriptEnabled = true
+//        webView.addJavascriptInterface(
+//            WebAppInterface(applicationContext),
+//            "Android"
+//        )
+
     }
 
     @SuppressLint("SetJavaScriptEnabled")
@@ -45,12 +55,23 @@ class WebViewActivity : BaseActivity(), AdvancedWebView.Listener {
         webView.webViewClient = object : WebViewClient() {
             override fun onPageFinished(view: WebView, url: String) {
                 progressBar.visibility = View.GONE
+//                Toast.makeText(applicationContext, url, Toast.LENGTH_SHORT).show()
+                Log.i("autolog", "url: " + url);
+            }
+
+            override fun shouldOverrideUrlLoading(view: WebView?, request: WebResourceRequest?): Boolean {
+                super.shouldOverrideUrlLoading(view, request)
+                Log.i("autolog", "request: " + request);
+
+                return true
             }
         }
         webView.settings.javaScriptEnabled = true
         webView.settings.loadWithOverviewMode = true
         webView.settings.useWideViewPort = true
         webView.settings.javaScriptCanOpenWindowsAutomatically = true
+
+
     }
 
     override fun onBackPressed() {
@@ -58,6 +79,9 @@ class WebViewActivity : BaseActivity(), AdvancedWebView.Listener {
             return
         }
         super.onBackPressed()
+        webView.onDestroy()
+        finish()
+
     }
 
     override fun onResume() {

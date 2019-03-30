@@ -14,4 +14,9 @@
         <!--TODO: add your default value-->
         <value>https://www.google.com</value>
     </entry>
+    <entry>
+        <key>ad_show_period_in_seconds</key>
+        <!--TODO: add your default value-->
+        <value>604800</value>
+    </entry>
 </defaultsMap>

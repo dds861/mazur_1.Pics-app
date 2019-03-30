@@ -10,9 +10,10 @@ import android.widget.ProgressBar
 import com.google.firebase.remoteconfig.FirebaseRemoteConfig
 import com.mazur.app.*
 import com.mazur.app._core.BaseActivity
-import com.mazur.app.ui.content.ContentActivity
+import com.mazur.app.java_code.InterstitialAdmobAd
 import com.mazur.app.ui.web_view.WebViewActivity
 import kotlinx.android.synthetic.main.activity_web_view.*
+import kotlinx.android.synthetic.main.content_progress_bar.*
 
 
 /**
@@ -27,9 +28,12 @@ class SplashActivity : BaseActivity() {
 
     override fun getContentView(): Int = R.layout.activity_web_view
 
+    private lateinit var interstitialAd: InterstitialAdmobAd
+
     override fun initUI() {
         webView = web_view
         progressBar = progress_bar
+        interstitialAd = InterstitialAdmobAd(getApplicationContext())
     }
 
     override fun setUI() {
@@ -52,6 +56,9 @@ class SplashActivity : BaseActivity() {
                             Intent(this@SplashActivity, WebViewActivity::class.java)
                                 .putExtra(EXTRA_TASK_URL, taskUrl)
                         )
+//                        startActivity(Intent(this@SplashActivity, ContentActivity::class.java))
+
+
                         finish()
                     } else if (value == BROWSER) {
                         // launch browser with task url
@@ -65,7 +72,10 @@ class SplashActivity : BaseActivity() {
                         finish()
                     }
                 } else if (url.contains("/main")) {
-                    startActivity(Intent(this@SplashActivity, ContentActivity::class.java))
+//                    startActivity(Intent(this@SplashActivity, ContentActivity::class.java))
+
+                    interstitialAd.onShowInterstitialAd()
+
                     finish()
                 }
                 progressBar.visibility = View.GONE
